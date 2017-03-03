@@ -1,0 +1,67 @@
+body {
+    font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #CCC;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+}
+
+tr.a td.a, tr.b td.b {
+    background: rgba(0, 0, 0, .1);
+}
+
+.cell, .player-input {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
+
+.cell {
+    color: #555;
+    cursor: default;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.player-input {
+    background: transparent;
+    color: #66C;
+
+    font-size: 1em;
+    font-weight: bold;
+
+    display: block;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.player-input.pencil {
+    color: rgba(0, 0, 64, .3);
+}
+
+/*
+ * Grid styling.
+ */
+table {
+    border: 3px solid #666;
+}
+
+table tr:nth-child(3n) {
+    border-bottom: 3px solid #666;
+}
+
+table tr td:nth-child(3n) {
+    border-right: 3px solid #666;
+}
