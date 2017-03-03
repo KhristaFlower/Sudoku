@@ -63,7 +63,7 @@
     </form>
 
     <p>
-        This project is on <a href="https://github.com/Kriptonic/Sudoku">GitHub</a>!it
+        This project is on <a href="https://github.com/Kriptonic/Sudoku">GitHub</a>!
     </p>
 
 </body>
