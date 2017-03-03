@@ -15,4 +15,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $solved = $puzzle->validate($playerProvidedAnswers);
 }
 
-include '../template.view.php';
+include '../views/git stemplate.view.php';
