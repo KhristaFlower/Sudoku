@@ -23,7 +23,7 @@ class Sudoku
      * The seed to use for puzzle generation.
      * @var null|int The seed.
      */
-	private $seed;
+    private $seed;
 
     /**
      * The difficulty the puzzle was generated with.
@@ -35,7 +35,7 @@ class Sudoku
      * The game-ready puzzle.
      * @var null|array|Cell[] The game grid.
      */
-	private $puzzle;
+    private $puzzle;
 
     /**
      * Sudoku constructor.

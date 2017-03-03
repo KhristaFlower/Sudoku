@@ -12,17 +12,17 @@ namespace Kriptonic\Sudoku;
  */
 class Cell
 {
-	/**
-	 * The position of this cell in the grid.
-	 * @var int
-	 */
-	private $index;
+    /**
+     * The position of this cell in the grid.
+     * @var int
+     */
+    private $index;
 
-	/**
-	 * The number of this cell on the grid.
-	 * @var int
-	 */
-	private $value;
+    /**
+     * The number of this cell on the grid.
+     * @var int
+     */
+    private $value;
 
     /**
      * Is this cells value hidden to the player?
@@ -34,36 +34,36 @@ class Cell
      * The value provided by the player for this cell.
      * @var int
      */
-	private $playerValue = null;
+    private $playerValue = null;
 
     /**
      * Used to hold whether the cell is in an error state.
      * @todo: implementation
      * @var bool True if in an error state; false otherwise.
      */
-	private $isErrored = false;
+    private $isErrored = false;
 
-	/**
-	 * Cell constructor.
-	 * 
-	 * @param int $index The index this cell represents in the grid.
-	 * @param int $value The number stored in this cell.
-	 */
-	public function __construct($index, $value)
-	{
-		$this->index = $index;
-		$this->value = $value;
-	}
+    /**
+     * Cell constructor.
+     *
+     * @param int $index The index this cell represents in the grid.
+     * @param int $value The number stored in this cell.
+     */
+    public function __construct($index, $value)
+    {
+        $this->index = $index;
+        $this->value = $value;
+    }
 
-	/**
-	 * Change whether this cell is player provided.
-	 * 
-	 * @param bool $newValue Is this cell player provided?
-	 */
-	public function setPlayerProvided($newValue)
-	{
-		$this->isPlayerProvided = $newValue;
-	}
+    /**
+     * Change whether this cell is player provided.
+     *
+     * @param bool $newValue Is this cell player provided?
+     */
+    public function setPlayerProvided($newValue)
+    {
+        $this->isPlayerProvided = $newValue;
+    }
 
     /**
      * Get the value provided by the player.
@@ -93,19 +93,19 @@ class Cell
         $this->playerValue = $playerValue;
     }
 
-	/**
-	 * Get the value contained in this cell.
-	 *
-	 * @return int The value in this cell.
-	 */
-	public function getValue()
-	{
-	    if ($this->isPlayerProvided()) {
-	        return $this->playerValue;
+    /**
+     * Get the value contained in this cell.
+     *
+     * @return int The value in this cell.
+     */
+    public function getValue()
+    {
+        if ($this->isPlayerProvided()) {
+            return $this->playerValue;
         } else {
             return $this->value;
         }
-	}
+    }
 
     /**
      * Assign a new value to this cell.
@@ -115,17 +115,17 @@ class Cell
     public function setValue($newValue)
     {
         $this->value = $newValue;
-	}
+    }
 
-	/**
-	 * Check if this cell is player provided.
-	 *
-	 * @return boolean True if the cell is player provided; false otherwise.
-	 */
-	public function isPlayerProvided()
-	{
-		return $this->isPlayerProvided;
-	}
+    /**
+     * Check if this cell is player provided.
+     *
+     * @return boolean True if the cell is player provided; false otherwise.
+     */
+    public function isPlayerProvided()
+    {
+        return $this->isPlayerProvided;
+    }
 
     /**
      * Get the index this cell represents.
@@ -135,5 +135,5 @@ class Cell
     public function getIndex()
     {
         return $this->index;
-	}
+    }
 }
