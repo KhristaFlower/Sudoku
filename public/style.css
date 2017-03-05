@@ -65,3 +65,24 @@ table tr:nth-child(3n) {
 table tr td:nth-child(3n) {
     border-right: 3px solid #666;
 }
+
+/*
+ * Conflict styling.
+ */
+.collision {
+    color: #955;
+}
+.collision input {
+    color: #C55;
+}
+
+/*
+ * Form styling.
+ */
+fieldset {
+    border: 0;
+}
+label {
+    width: 200px;
+    display: inline-block;
+}

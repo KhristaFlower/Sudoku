@@ -37,11 +37,10 @@ class Cell
     private $playerValue = null;
 
     /**
-     * Used to hold whether the cell is in an error state.
-     * @todo: implementation
-     * @var bool True if in an error state; false otherwise.
+     * Used to hold whether the cell is colliding with another.
+     * @var bool True if the cell collides with a duplicate; false otherwise.
      */
-    private $isErrored = false;
+    private $hasCollision = false;
 
     /**
      * Cell constructor.
@@ -135,5 +134,25 @@ class Cell
     public function getIndex()
     {
         return $this->index;
+    }
+
+    /**
+     * Get whether the cell has a collision or not.
+     *
+     * @return bool True if the cell has collisions; false otherwise.
+     */
+    public function hasCollision()
+    {
+        return $this->hasCollision;
+    }
+
+    /**
+     * Set whether or not this cell has a collision.
+     *
+     * @param bool $hasCollision The new value for the collision state.
+     */
+    public function setCollision($hasCollision)
+    {
+        $this->hasCollision = $hasCollision;
     }
 }

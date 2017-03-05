@@ -203,54 +203,53 @@ class Sudoku
      */
     private function validateGrid()
     {
+        $isValid = true;
+
         // Check for conflicts in all rows first, its the fastest check we can do.
         foreach ($this->getPlayRows() as $row) {
 
-            // Get an array representation of this 9 cell row.
-            $valuesInRow = array_filter(array_map(function (Cell $cell) {
-                return $cell->getValue();
-            }, $row));
-
-            // Check for the duplicates in each row.
-            if (count($valuesInRow) !== 9 || count($valuesInRow) !== count(array_unique($valuesInRow))) {
-                return false;
+            $collection = new Collection($row);
+            if (!$collection->isValid()) {
+                $isValid = false;
             }
         }
 
         // Next we check all the columns to see if any contain duplicates.
-        $gridColumnValues = [];
+        $gridColumnCells = [];
 
         foreach ($this->puzzle as $index => $cell) {
-            $gridColumnValues[$index % 9][] = $cell->getValue();
+            $gridColumnCells[$index % 9][] = $cell;
         }
 
-        foreach ($gridColumnValues as $columnValues) {
+        foreach ($gridColumnCells as $columnCells) {
             // Check for the duplicates in each column.
-            if (count(array_filter($columnValues)) !== 9 || count($columnValues) !== count(array_unique($columnValues))) {
-                return false;
+            $collection = new Collection($columnCells);
+            if (!$collection->isValid()) {
+                $isValid = false;
             }
         }
 
         // Finally check all 9 of the 3x3 grids for duplicate numbers.
-        $gridSquares = [];
+        $gridSquareCells = [];
 
         foreach ($this->puzzle as $index => $cell) {
 
             $squareX = floor($index / 3) % 3;
             $squareY = floor($index / 27);
 
-            $gridSquares[$squareX . ',' . $squareY][] = $cell->getValue();
+            $gridSquareCells[$squareX . ',' . $squareY][] = $cell;
 
         }
 
-        foreach ($gridSquares as $gridSquare) {
+        foreach ($gridSquareCells as $gridCells) {
             // For for the duplicates in each square.
-            if (count(array_filter($gridSquare)) !== 9 || count($gridSquare) !== count(array_unique($gridSquare))) {
-                return false;
+            $collection = new Collection($gridCells);
+            if (!$collection->isValid()) {
+                $isValid = false;
             }
         }
 
-        return true;
+        return $isValid;
     }
 
 }

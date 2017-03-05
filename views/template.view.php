@@ -28,7 +28,7 @@
                 <tr class="<?php echo floor($i / 3) % 2 ? 'b' : 'a'; ?>">
                     <?php /** @var \Kriptonic\Sudoku\Cell $cell */ ?>
                     <?php foreach ($row as $j => $cell): ?>
-                        <td class="cell <?php echo floor($j / 3) % 2 ? 'b' : 'a'; ?>">
+                        <td class="cell <?php echo floor($j / 3) % 2 ? 'b' : 'a'; ?> <?php echo $cell->hasCollision() && $showErrors ? 'collision' : ''; ?>">
 
                             <?php if ($cell->isPlayerProvided()): ?>
 
@@ -52,13 +52,25 @@
             <?php endforeach; ?>
         </table>
 
-        <label for="seed">Seed</label>
-        <input type="text" name="seed" id="seed" value="<?php echo $puzzle->getSeed(); ?>">
+        <fieldset>
+            <label for="seed">Seed</label>
+            <input type="text" name="seed" id="seed" value="<?php echo $puzzle->getSeed(); ?>">
+            <input type="hidden" name="oldSeed" value="<?php echo $puzzle->getSeed(); ?>"/>
+        </fieldset>
 
-        <label for="difficulty">Difficulty (Easy 1 - 6 Hard)</label>
-        <input type="number" min="1" max="6" step="1" name="difficulty" id="difficulty" value="<?php echo $puzzle->getDifficulty(); ?>"/>
+        <fieldset>
+            <label for="difficulty">Difficulty (Lower is easier)</label>
+            <input type="number" min="1" max="7" step="1" name="difficulty" id="difficulty" value="<?php echo $puzzle->getDifficulty(); ?>"/>
+        </fieldset>
 
-        <input type="submit" value="Generate / Validate"/>
+        <fieldset>
+            <label for="showErrors">Show errors</label>
+            <input type="checkbox" name="showErrors" id="showErrors" <?php if ($showErrors) { echo 'checked'; } ?>/>
+        </fieldset>
+
+        <fieldset>
+            <input type="submit" value="Generate / Validate"/>
+        </fieldset>
 
     </form>
 
