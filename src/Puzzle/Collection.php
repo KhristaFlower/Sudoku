@@ -1,6 +1,6 @@
 <?php
 
-namespace Kriptonic\Sudoku;
+namespace Kriptonic\Sudoku\Puzzle;
 
 /**
  * Class Collection
@@ -9,7 +9,7 @@ namespace Kriptonic\Sudoku;
  * that we can handle it later. Typically this class will be provided with a collection of cells forming one of the
  * check conditions in Sudoku, namely the 9 cells in each row, column, and square.
  *
- * @package Kriptonic\Sudoku
+ * @package Kriptonic\Sudoku\Puzzle
  * @author Christopher Sharman <christopher.p.sharman@gmail.com>
  */
 class Collection

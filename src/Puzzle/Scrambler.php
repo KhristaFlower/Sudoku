@@ -1,13 +1,13 @@
 <?php
 
-namespace Kriptonic\Sudoku;
+namespace Kriptonic\Sudoku\Puzzle;
 
 /**
  * Class Scrambler
  *
  * Used to scramble a Sudoku grid.
  *
- * @package Kriptonic\Sudoku
+ * @package Kriptonic\Sudoku\Puzzle
  * @author Christopher Sharman <christopher.p.sharman@gmail.com>
  */
 class Scrambler

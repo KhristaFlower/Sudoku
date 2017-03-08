@@ -1,13 +1,13 @@
 <?php
 
-namespace Kriptonic\Sudoku;
+namespace Kriptonic\Sudoku\Puzzle;
 
 /**
  * Class Cell
  *
  * The Cell is responsible for holding information relating to a position on the grid.
  *
- * @package Kriptonic\Sudoku
+ * @package Kriptonic\Sudoku\Puzzle
  * @author Christopher Sharman <christopher.p.sharman@gmail.com>
  */
 class Cell
