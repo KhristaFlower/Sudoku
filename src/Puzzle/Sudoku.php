@@ -1,13 +1,13 @@
 <?php
 
-namespace Kriptonic\Sudoku;
+namespace Kriptonic\Sudoku\Puzzle;
 
 /**
  * Class Sudoku
  *
  * Used to generate Sudoku puzzles.
  *
- * @package Kriptonic\Sudoku
+ * @package Kriptonic\Sudoku\Puzzle
  * @author Christopher Sharman <christopher.p.sharman@gmail.com>
  */
 class Sudoku
@@ -36,6 +36,12 @@ class Sudoku
      * @var null|array|Cell[] The game grid.
      */
     private $puzzle;
+
+    /**
+     * Stores whether the puzzle has been solved.
+     * @var bool True if the puzzle has been solved; false otherwise.
+     */
+    private $isSolved;
 
     /**
      * Sudoku constructor.
@@ -153,6 +159,16 @@ class Sudoku
     }
 
     /**
+     * Get whether the puzzle has been solved or not.
+     *
+     * @return bool True if the puzzle has been solved; false otherwise.
+     */
+    public function isSolved()
+    {
+        return $this->isSolved;
+    }
+
+    /**
      * Get an already completed grid grid.
      *
      * @return array|int[] An array of numbers representing the puzzle grid.
@@ -190,7 +206,9 @@ class Sudoku
         }
 
         // Check to see if the grid is valid.
-        return $this->validateGrid();
+        $this->isSolved = $this->validateGrid();
+
+        return $this->isSolved;
     }
 
     /**
