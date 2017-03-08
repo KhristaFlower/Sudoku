@@ -16,13 +16,13 @@ class View extends Response
      * The name of the view file to display.
      * @var string The name of the view file.
      */
-	private $viewFile;
+    private $viewFile;
 
     /**
      * An array of data to be used in the view.
      * @var array Data to be used in the view.
      */
-	private $viewData;
+    private $viewData;
 
     /**
      * View constructor.
@@ -30,11 +30,11 @@ class View extends Response
      * @param string $viewFile The name of the view to load.
      * @param array $data An array of parameters to be used on the view.
      */
-	public function __construct($viewFile, $data = [])
-	{
-		$this->viewFile = $viewFile;
-		$this->viewData = $data;
-	}
+    public function __construct($viewFile, $data = [])
+    {
+        $this->viewFile = $viewFile;
+        $this->viewData = $data;
+    }
 
     /**
      * Display the view page and make the data variables available for use.
@@ -47,5 +47,5 @@ class View extends Response
         $pageInclude = '../app/views/' . $this->viewFile . '.php';
 
         require '../app/views/master.layout.php';
-	}
+    }
 }

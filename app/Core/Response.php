@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kriptonic
- * Date: 08/03/2017
- * Time: 00:38
- */
 
 namespace Kriptonic\App\Core;
 

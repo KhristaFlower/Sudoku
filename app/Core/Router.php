@@ -16,14 +16,14 @@ class Router
      * A collection of routes and their controllers for each method type.
      * @var array The routes definition array.
      */
-	private $routes = [];
+    private $routes = [];
 
     /**
      * Router constructor.
      *
      * @param string $routesFile The file path to the location to load routes from.
      */
-	public function __construct($routesFile)
+    public function __construct($routesFile)
     {
         $this->load($routesFile);
     }
@@ -55,23 +55,23 @@ class Router
      * @param string $uri The current request URI.
      * @throws \Exception Thrown when a route could not be matched.
      */
-	public function dispatch($method, $uri)
-	{
-	    if (!isset($this->routes[$method][$uri])) {
-	        throw new \Exception("Route '$uri' is not supported for '$method' method");
+    public function dispatch($method, $uri)
+    {
+        if (!isset($this->routes[$method][$uri])) {
+            throw new \Exception("Route '$uri' is not supported for '$method' method");
         }
 
         $routeController = $this->routes[$method][$uri];
 
-		$response = $this->handle($routeController);
+        $response = $this->handle($routeController);
 
-		if ($response instanceof Response) {
-		    $response->handle();
+        if ($response instanceof Response) {
+            $response->handle();
         } else {
-		    print json_encode($response);
-		    exit;
+            print json_encode($response);
+            exit;
         }
-	}
+    }
 
     /**
      * Handle running the route controller and returning the response.
@@ -80,12 +80,16 @@ class Router
      * @return View|Redirect A response for the framework to handle.
      * @throws \Exception Thrown when a controller action does not exist.
      */
-	private function handle($routeController)
-	{
-	    list($controllerName, $controllerAction) = explode('@', $routeController);
-		$controllerClass = '\\Kriptonic\\App\\Controllers\\' . $controllerName;
+    private function handle($routeController)
+    {
+        list($controllerName, $controllerAction) = explode('@', $routeController);
+        $controllerClass = '\\Kriptonic\\App\\Controllers\\' . $controllerName;
 
-		$controller = new $controllerClass;
+        if (!class_exists($controllerClass)) {
+            throw new \Exception("Controller '$controllerClass' does not exist");
+        }
+
+        $controller = new $controllerClass;
 
         if (!method_exists($controller, $controllerAction)) {
             throw new \Exception("Action '$controllerAction' does not exist on controller '$controllerClass'");
@@ -93,8 +97,8 @@ class Router
 
         $response = $controller->$controllerAction();
 
-		return $response;
-	}
+        return $response;
+    }
 
     /**
      * Register a get route.
@@ -102,10 +106,10 @@ class Router
      * @param string $route The URI for this route.
      * @param string $controller The controller and action to run for the route.
      */
-	public function get($route, $controller)
-	{
-		$this->routes['GET'][$route] = $controller;
-	}
+    public function get($route, $controller)
+    {
+        $this->routes['GET'][$route] = $controller;
+    }
 
     /**
      * Register a post route.
@@ -113,8 +117,8 @@ class Router
      * @param string $route The URI for this route.
      * @param string $controller The controller and action to run for the route.
      */
-	public function post($route, $controller)
-	{
-		$this->routes['POST'][$route] = $controller;
-	}
+    public function post($route, $controller)
+    {
+        $this->routes['POST'][$route] = $controller;
+    }
 }

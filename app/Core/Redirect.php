@@ -16,23 +16,23 @@ class Redirect extends Response
      * The location this redirect is pointing at.
      * @var string The location to redirect to.
      */
-	private $location;
+    private $location;
 
     /**
      * Redirect constructor.
      *
      * @param string $location The location to redirect to.
      */
-	public function __construct($location)
-	{
-		$this->location = $location;
-	}
+    public function __construct($location)
+    {
+        $this->location = $location;
+    }
 
     /**
      * Perform the redirect.
      */
-	public function handle()
-	{
-		header('Location: /' . $this->location);
-	}
+    public function handle()
+    {
+        header('Location: /' . $this->location);
+    }
 }

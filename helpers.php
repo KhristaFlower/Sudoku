@@ -17,7 +17,7 @@ use Kriptonic\App\Core;
  */
 function view($file, $data = [])
 {
-	return new Core\View($file, $data);
+    return new Core\View($file, $data);
 }
 
 /**
@@ -28,5 +28,5 @@ function view($file, $data = [])
  */
 function redirect($location)
 {
-	return new Core\Redirect($location);
+    return new Core\Redirect($location);
 }

@@ -21,7 +21,7 @@ class PuzzleController
     public function play()
     {
         return $this->handlePuzzle();
-	}
+    }
 
     /**
      * Load the page, play the game, and validate the players answers.
@@ -31,14 +31,14 @@ class PuzzleController
     public function validate()
     {
         return $this->handlePuzzle();
-	}
+    }
 
     /**
      * A utility method used by both get and post methods for loading form data and handling it.
      *
      * @return \Kriptonic\App\Core\Response
      */
-	private function handlePuzzle()
+    private function handlePuzzle()
     {
         $seed = Request::input('seed', rand(0, PHP_INT_MAX));
         $oldSeed = Request::input('oldSeed', null);
