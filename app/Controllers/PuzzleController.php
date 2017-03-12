@@ -44,14 +44,16 @@ class PuzzleController
         $oldSeed = Request::input('oldSeed', null);
         $difficulty = Request::input('difficulty', 3);
         $showErrors = Request::input('showErrors', false);
+        $playerPencils = [];
 
         $puzzle = new Sudoku($seed, $difficulty);
 
         // Don't validate the player answers if they have also changed the seed.
         if ($seed === $oldSeed) {
             $puzzle->validate(Request::input('playerInput', []));
+            $playerPencils = Request::input('playerPencils', []);
         }
 
-        return view('play', compact('puzzle', 'seed', 'difficulty', 'showErrors'));
+        return view('play', compact('puzzle', 'seed', 'difficulty', 'showErrors', 'playerPencils'));
     }
 }

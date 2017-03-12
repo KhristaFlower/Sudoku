@@ -25,6 +25,7 @@ tr.a td.a, tr.b td.b {
 }
 
 .cell {
+    position: relative;
     color: #555;
     cursor: default;
 
@@ -46,9 +47,6 @@ tr.a td.a, tr.b td.b {
     padding: 0;
     margin: 0;
     border: 0;
-}
-.player-input.pencil {
-    color: rgba(0, 0, 64, .3);
 }
 
 /*
@@ -85,4 +83,64 @@ fieldset {
 label {
     width: 200px;
     display: inline-block;
+}
+/*
+ * Pencil grid
+ */
+.pencil-grid {
+    margin-top: 2px;
+    margin-left: 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    width: inherit;
+    height: inherit;
+    pointer-events: none;
+}
+.pencil-square {
+    width: 33%;
+    height: 33%;
+    font-size: .3em;
+    position: absolute;
+    color: #AAA;
+}
+
+.pencil-square-1 {
+    left: 0;
+    top: 0;
+}
+.pencil-square-2 {
+    left: 33%;
+    top: 0;
+}
+.pencil-square-3 {
+    right: 0;
+    top: 0;
+}
+
+.pencil-square-4 {
+    left: 0;
+    bottom: 33%;
+}
+.pencil-square-5 {
+    right: 33%;
+    bottom: 33%;
+}
+.pencil-square-6 {
+    right: 0;
+    bottom: 33%;
+}
+
+.pencil-square-7 {
+    left: 0;
+    bottom: 0;
+}
+.pencil-square-8 {
+    left: 33%;
+    bottom: 0;
+}
+.pencil-square-9 {
+    right: 0;
+    bottom: 0;
 }

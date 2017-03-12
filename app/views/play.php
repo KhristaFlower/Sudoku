@@ -7,29 +7,49 @@
 <?php endif; ?>
 
 <form action="" method="post">
-    <input type="hidden" name="seed" value="<?php echo $puzzle->getSeed(); ?>"/>
+    <input type="hidden" name="seed" value="<?= $puzzle->getSeed() ?>"/>
 
     <table>
         <?php foreach ($puzzle->getPlayRows() as $i => $row): ?>
-            <tr class="<?php echo floor($i / 3) % 2 ? 'b' : 'a'; ?>">
+            <tr class="<?= floor($i / 3) % 2 ? 'b' : 'a' ?>">
                 <?php /** @var \Kriptonic\Sudoku\Puzzle\Cell $cell */ ?>
                 <?php foreach ($row as $j => $cell): ?>
-                    <td class="cell <?php echo floor($j / 3) % 2 ? 'b' : 'a'; ?> <?php echo $cell->hasCollision() && $showErrors ? 'collision' : ''; ?>">
+                    <td class="cell <?= floor($j / 3) % 2 ? 'b' : 'a' ?> <?= $cell->hasCollision() && $showErrors ? 'collision' : '' ?>">
 
                         <?php if ($cell->isPlayerProvided()): ?>
 
                             <input
                                     type="text"
-                                    name="playerInput[<?php echo $cell->getIndex(); ?>]"
+                                    name="playerInput[<?= $cell->getIndex() ?>]"
                                     class="player-input"
                                     maxlength="1"
                                     onkeypress="return validate(event);"
                                     autocomplete="off"
-                                    value="<?php echo $cell->getPlayerValue(); ?>"
+                                    value="<?= $cell->getPlayerValue() ?>"
+                                    data-cell-index="<?= $cell->getIndex() ?>"
                             />
 
+                            <input
+                                    type="hidden"
+                                    name="playerPencils[<?= $cell->getIndex() ?>]"
+                                    id="pencil-input-<?= $cell->getIndex() ?>"
+                                    <?php if (isset($playerPencils[$cell->getIndex()])): ?>
+                                        value="<?= $playerPencils[$cell->getIndex()] ?>"
+                                    <?php endif; ?>
+                            />
+
+                            <div class="pencil-grid" id="pencil-grid-<?= $cell->getIndex() ?>">
+                                <?php if (isset($playerPencils[$cell->getIndex()])): ?>
+                                    <?php foreach (explode(';', $playerPencils[$cell->getIndex()]) as $numCell): ?>
+                                        <div class="pencil-square pencil-square-<?= $numCell ?>" id="pencil-cell-<?= $cell->getIndex() ?>-<?= $numCell ?>">
+                                            <?= $numCell ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+
                         <?php else: ?>
-                            <b><?php echo $cell->getValue(); ?></b>
+                            <b><?= $cell->getValue() ?></b>
                         <?php endif; ?>
 
                     </td>
@@ -39,14 +59,19 @@
     </table>
 
     <fieldset>
+        <label for="pencil">Pencil mode</label>
+        <input type="checkbox" id="pencil">
+    </fieldset>
+
+    <fieldset>
         <label for="seed">Seed</label>
-        <input type="text" name="seed" id="seed" value="<?php echo $puzzle->getSeed(); ?>">
-        <input type="hidden" name="oldSeed" value="<?php echo $puzzle->getSeed(); ?>"/>
+        <input type="text" name="seed" id="seed" value="<?= $puzzle->getSeed() ?>">
+        <input type="hidden" name="oldSeed" value="<?= $puzzle->getSeed() ?>"/>
     </fieldset>
 
     <fieldset>
         <label for="difficulty">Difficulty (Lower is easier)</label>
-        <input type="number" min="1" max="7" step="1" name="difficulty" id="difficulty" value="<?php echo $puzzle->getDifficulty(); ?>"/>
+        <input type="number" min="1" max="7" step="1" name="difficulty" id="difficulty" value="<?= $puzzle->getDifficulty() ?>"/>
     </fieldset>
 
     <fieldset>
