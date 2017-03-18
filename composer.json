@@ -4,5 +4,9 @@
       "Kriptonic\\Sudoku\\": "src/",
       "Kriptonic\\App\\": "app/"
     }
+  },
+  "require": {
+    "illuminate/database": "^5.4",
+    "robmorgan/phinx": "^0.8.0"
   }
 }

@@ -2,6 +2,8 @@
 
 namespace Kriptonic\App\Core;
 
+use Kriptonic\App\Models\User;
+
 /**
  * Class View
  *
@@ -42,6 +44,9 @@ class View extends Response
     public function handle()
     {
         extract($this->viewData);
+
+        // Make the currently logged in User object available in the views.
+        $currentUser = User::current();
 
         // $pageInclude is required inside of master.layout.php
         $pageInclude = '../app/views/' . $this->viewFile . '.php';

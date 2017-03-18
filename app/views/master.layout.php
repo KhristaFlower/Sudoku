@@ -13,6 +13,14 @@
 </head>
 <body>
 
+    <p>
+        <?php if ($currentUser): ?>
+            Logged in as <?= $currentUser->username ?> - <a href="/logout">Logout</a>
+        <?php else: ?>
+            <a href="/login">Login</a> or <a href="/register">register</a> to track puzzles.
+        <?php endif; ?>
+    </p>
+
     <?php require $pageInclude; ?>
 
 </body>

@@ -8,6 +8,8 @@ use Kriptonic\Sudoku\Puzzle\Sudoku;
 /**
  * Class PuzzleController
  *
+ * The Puzzle Controller is used for operations relating to playing puzzles.
+ *
  * @package Kriptonic\App\Controllers
  * @author Christopher Sharman <christopher.p.sharman@gmail.com>
  */
