@@ -8,7 +8,7 @@ class InitialSetup extends AbstractMigration
     {
         $this->table('users')
             ->addColumn('username', 'string', ['length' => 30])
-            ->addColumn('email', 'string', ['length' => 255])
+            ->addColumn('email', 'string', ['length' => 255, 'null' => true])
             ->addColumn('password', 'string', ['length' => 60])
             ->addTimestamps()
             ->addIndex('username', ['unique' => true])

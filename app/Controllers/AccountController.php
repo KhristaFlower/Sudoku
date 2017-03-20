@@ -2,6 +2,7 @@
 
 namespace Kriptonic\App\Controllers;
 
+use Illuminate\Support\Traits\CapsuleManagerTrait;
 use Kriptonic\App\Core\Request;
 use Kriptonic\App\Models\User;
 
@@ -32,29 +33,44 @@ class AccountController
      */
     public function store()
     {
+        // TODO: Move validation out to a separate process.
+        $desiredUsername = Request::input('name');
+        $desiredPassword = Request::input('password');
+        $desiredEmail = Request::input('email');
+
+        $errors = [];
+
+        // TODO: Proper flash system for errors to display on the next page..
+
         // Validate that we have the required fields.
-        if (!Request::input('name') || !Request::input('password')) {
-            // TODO: Proper flash system.
-            $message = 'A username and password is required.';
-
-            return view('register', compact('message'));
+        if (!$desiredUsername) {
+            $errors[] = 'A username is required.';
+        } elseif (!preg_match('/[A-Za-z0-9\-_]/', $desiredUsername)) {
+            $errors[] = 'Username contains invalid characters (alphanumeric, hyphens, and underscores only)';
+        } elseif (User::query()->where('username', '=', $desiredUsername)->exists()) {
+            $errors[] = 'Username has been taken';
         }
 
-        // Check to see if our unique fields have been taken already.
-        $usernameCheck = User::query()->where('username', '=', Request::input('username'))->get();
-        if ($usernameCheck->count()) {
-            return view('register', ['message' => 'That username is already taken.']);
+        if (!$desiredEmail) {
+            // No email is valid - if one is provided then we have to validate it.
+        } elseif (!filter_var($desiredEmail, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Email is not valid';
+        } elseif (User::query()->where('email', '=', $desiredEmail)->exists()) {
+            $errors[] = 'Email has already been taken';
         }
 
-        $emailCheck = User::query()->where('email', '=', Request::input('email'))->get();
-        if ($emailCheck->count()) {
-            return view('register', ['message' => 'That email is already taken.']);
+        if (!$desiredPassword) {
+            $errors[] = 'A password is required.';
+        }
+
+        if (count($errors)) {
+            return view('register', compact('errors', 'desiredUsername', 'desiredEmail'));
         }
 
         $user = new User();
-        $user->username = Request::input('name');
-        $user->email = Request::input('email');
-        $user->password = password_hash(Request::input('password'), PASSWORD_BCRYPT);
+        $user->username = $desiredUsername;
+        $user->email = $desiredEmail;
+        $user->password = password_hash($desiredPassword, PASSWORD_BCRYPT);
         $user->save();
 
         return redirect('login');

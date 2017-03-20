@@ -2,10 +2,17 @@
 
 <form action="register" method="post">
 
-    <?php if (isset($message)): ?>
+    <?php if (isset($errors) && count($errors)): ?>
         <p>
-            <?= $message ?>
+            The following errors were encountered:
         </p>
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li>
+                    <?= $error ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
     <?php endif; ?>
 
     <p>
@@ -14,12 +21,12 @@
 
     <fieldset>
         <label for="name">Username*</label>
-        <input type="text" name="name" id="name"/>
+        <input type="text" name="name" id="name" value="<?= $desiredUsername ?? '' ?>"/>
     </fieldset>
 
     <fieldset>
         <label for="email">Email</label>
-        <input type="email" name="email" id="email"/>
+        <input type="email" name="email" id="email" value="<?= $desiredEmail ?? '' ?>"/>
     </fieldset>
 
     <fieldset>

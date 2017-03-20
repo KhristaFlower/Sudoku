@@ -46,6 +46,12 @@ class Request
         }
 
         if (isset($_POST[$parameter])) {
+
+            // Return null for empty values.
+            if (is_string($_POST[$parameter]) && !strlen($_POST[$parameter])) {
+                return null;
+            }
+
             return $_POST[$parameter];
         }
 
@@ -66,6 +72,12 @@ class Request
         }
 
         if (isset($_GET[$parameter])) {
+
+            // Return null for empty values.
+            if (is_string($_GET[$parameter]) && !strlen($_GET[$parameter])) {
+                return null;
+            }
+
             return $_GET[$parameter];
         }
 
